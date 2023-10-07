@@ -28,24 +28,23 @@ void* aim_on_threaded(void* args) {
 }
 
 int main() {
+    char* iface = "IFACE";
     title();
     YELLOW();
     printf("Wifi scan is running...\n");
-   // byte station[6] = {0x4a,0xd3,0x3b,0x15,0x73,0xf7};
-    struct wifi_network* networks = wifi_scan("wlo1");
+    struct wifi_network* networks = wifi_scan(iface);
     struct wifi_network* network = menu(networks);
-    // sniff_handshake("wlo1",2462,network->ap_hwaddr,station);
 
     YELLOW();
     printf("doing a station scan...\n");
-    struct station* station = find_station("wlo1",network->freq,network->ap_hwaddr);
+    struct station* station = find_station(iface,network->freq,network->ap_hwaddr);
     struct station* tmp = station;
     //sniff_handshake("wlo1",network->freq,station,network->ap_hwaddr);
 
-    iface_toogle("wlo1",0);
-    toggle_monitor("wlo1",1);
-    iface_toogle("wlo1",1);
-    channel_switch("wlo1",network->freq);
+    iface_toogle(iface,0);
+    toggle_monitor(iface,1);
+    iface_toogle(iface,1);
+    channel_switch(iface,network->freq);
     CYAN();
     printf("trying to get an handshake...\n");
 
@@ -67,8 +66,8 @@ int main() {
        // aim_on("wlo1",network->freq,station,network->ap_hwaddr);
         struct args* a = (struct args*)malloc(sizeof(struct args));
         a->ended = &ended_identifier;
-        a->iface = malloc(strlen("wlo1"));
-        memcpy(a->iface,"wlo1",strlen("wlo1"));
+        a->iface = malloc(strlen(iface));
+        memcpy(a->iface,iface,strlen(iface));
         a->freq = network->freq;
         memcpy(a->bssid,network->ap_hwaddr,6);
         memcpy(a->station,tmp->mac,6);
@@ -89,9 +88,9 @@ int main() {
     deep_station_free(station);
 
 
-    iface_toogle("wlo1",0);
-    toggle_monitor("wlo1",0);
-    iface_toogle("wlo1",1);
+    iface_toogle(iface,0);
+    toggle_monitor(iface,0);
+    iface_toogle(iface,1);
 
     
 

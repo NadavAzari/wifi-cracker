@@ -30,7 +30,6 @@ void sniff_handshake(char* iface, byte bssid[6],byte station[6], hcallback callb
         byte* tmp_buff = buffer;
 
         uint16_t size = *((uint16_t*)(tmp_buff + 2));
-       // printf("%u\n",size);
         tmp_buff += size;
 
         struct iee_802_11_hdr* wifi_hdr = (struct iee_802_11_hdr*)(tmp_buff);
@@ -42,12 +41,7 @@ void sniff_handshake(char* iface, byte bssid[6],byte station[6], hcallback callb
        
 
         if(is_qos_data(wifi_hdr->frame_control)) {
-            if(ntohs(*((uint16_t*)(tmp_buff + 6))) == 0x888e) {
-                // printf("source - ");
-                // print_mac(wifi_hdr->src);
-                // printf(" | dst - ");
-                // print_mac(wifi_hdr->dst);
-                // printf("\n------------------------------------\n"); 
+            if(ntohs(*((uint16_t*)(tmp_buff + 6))) == 0x888e) { 
                 if(c % 2) {
                     if(memcmp(wifi_hdr->src,bssid,6) != 0 || memcmp(wifi_hdr->dst,station,6) != 0) {
                         continue;
