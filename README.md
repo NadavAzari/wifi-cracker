@@ -79,6 +79,6 @@ and the rest isnt matter now.
 
 With the anonce and snonce you could do:
 + if you have the password you can make the encryption key of the client and decrypt its network traffic
-+ you can try passwords untill you get the right one (online bruteforce)
++ you can try passwords untill you get the right one (offline bruteforce)
 
 I didnt implement the next part which is do something with the handshake, you can do! :)
