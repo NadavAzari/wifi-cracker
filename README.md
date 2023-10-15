@@ -2,7 +2,7 @@
 
 This tool lets you select a wifi networtk, and gets an handshake for you.
 You can use it in order to crack passwords or decrypting wifi network traffic.
-The tool only gets you an handshake, you cnam odify it to do whatever you wants with it!.
+The tool only gets you an handshake, you can modify it to do whatever you wants with it!.
 
 ## Step 1
 A wifi networks scan, how it works:
